@@ -1,0 +1,79 @@
+A lesson from the course:
+
+Repository Details :
+
+Please note: You will have to log in to AWS console and
+
+create your own AccessKey and secret_key and replace it
+
+in projects appropriately.
+
+Ex:
+
+static String ACCESS_KEY = "AKIAJMMYMHBAO2QUZVKQ";
+
+static String SECRET_KEY = “8SA39ZBoEVR+7XnezRtjsncfrO2XX+DYAdxTHEXj";
+
+In Class PostMessageOnQueue in Sqs Project will have to be replaced
+
+by your own Access_Key and Secret_key.
+
+
+    All Dynamo codes base could be found here
+
+https://github.com/junaidjp/aws-dynamodb-retrieve-insert
+
+https://github.com/junaidjp/aws-dynamodb-retrieve-by-parameters
+
+https://github.com/junaidjp/aws-dynamodb-insert-dynamomapper
+
+
+
+    AWS Code Build-Code/Deploy(Devops) can be found here - https://github.com/junaidjp/aws-codepipeline-codebuild.git.
+
+
+    All SNS codebase can be found here - https://github.com/junaidjp/aws-sns
+
+    All SQS codebase can be found here -  https://github.com/junaidjp/aws-sqs
+
+=================================
+
+A instructor comment:
+
+Repository Details :
+
+Please note : You will have to login to AWS console and
+
+create your own AccessKey and secret_key and replace it
+
+in projects appropriately.
+
+Ex:
+
+static String ACCESS_KEY = "AKIAJMMYMHBAO2QUZVKQ";
+
+static String SECRET_KEY = “8SA39ZBoEVR+7XnezRtjsncfrO2XX+DYAdxTHEXj";
+
+In Class PostMessageOnQueue in Sqs Project will have to be replaced
+
+by your own Access_Key and Secret_key.
+
+All Dynamo codes base could be found here
+
+https://github.com/junaidjp/aws-dynamodb-retrieve-insert
+
+https://github.com/junaidjp/aws-dynamodb-retrieve-by-parameters
+
+https://github.com/junaidjp/aws-dynamodb-insert-dynamomapper
+
+AWS Code build and Code Deploy can be found here
+
+https://github.com/junaidjp/aws-codepipeline-codebuild.git
+
+All SNS code base can be found here
+
+https://github.com/junaidjp/aws-sns
+
+All SQS code base can be found here
+
+https://github.com/junaidjp/aws-sqs
