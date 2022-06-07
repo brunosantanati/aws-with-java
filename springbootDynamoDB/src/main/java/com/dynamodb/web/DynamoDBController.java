@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dynamodb.dto.Movie;
 import com.dynamodb.service.MovieSearchService;
 
-@RestController("movies")
+@RestController
+@RequestMapping("movies")
 public class DynamoDBController {
 
 	private MovieSearchService movieSearchService;
