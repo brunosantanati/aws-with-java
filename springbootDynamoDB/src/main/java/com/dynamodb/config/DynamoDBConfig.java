@@ -13,7 +13,6 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 
 @Configuration
-@EnableDynamoDBRepositories(basePackages = "com.dynamodb.repositories")
 public class DynamoDBConfig {
 
 	@Bean
