@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,6 +39,11 @@ public class DynamoDBController {
 		List<Movie> moviesList = StreamSupport.stream(movies.spliterator(), false).collect(Collectors.toList());
 
 		return new ResponseEntity<List<Movie>>(moviesList, headers, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/{filmId}", method = RequestMethod.GET)
+	public void retrieveMovieById(@PathVariable String filmId) {
+		movieSearchService.findMovieById(filmId);
 	}
 
 }

@@ -7,19 +7,26 @@ import java.util.stream.StreamSupport;
 import org.springframework.stereotype.Service;
 
 import com.dynamodb.dto.Movie;
+import com.dynamodb.repositories.MovieDynamoRepository;
 import com.dynamodb.repositories.MovieRepository;
 
 @Service
 public class MovieSearchService {
 	
-	public MovieRepository movieRepository;
+	private MovieRepository movieRepository;
+	private MovieDynamoRepository movieDynamoRepository; 
 	
-	public MovieSearchService(MovieRepository movieRepository) {
+	public MovieSearchService(MovieRepository movieRepository, MovieDynamoRepository movieDynamoRepository) {
         this.movieRepository = movieRepository;
+        this.movieDynamoRepository = movieDynamoRepository;
     }
 
 	public List<Movie> findAllMovies() {
         return StreamSupport.stream(movieRepository.findAll().spliterator(), true).collect(Collectors.toList());
     }
+	
+	public void findMovieById(String filmId) {
+		movieDynamoRepository.findByKey(filmId);
+	}
 
 }
