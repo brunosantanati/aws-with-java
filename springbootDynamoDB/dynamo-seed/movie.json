@@ -1,6 +1,6 @@
 {
 	"FilmId": {
-    	"N": "1"
+    	"S": "1"
   	},
 	"Title": {
 		"S": "Jurassic Park"
@@ -18,19 +18,19 @@
 		"S": "2 Hrs"
 	},
 	"Genre": {
-		"SS": [
-			"Action",
-			"Adventure",
-			"Sci-Fi"
+		"L": [
+			{"S": "Action"},
+			{"S": "Adventure"},
+			{"S": "Sci-Fi"}
 		]
 	},
 	"Director": {
 		"S": "Steven Spielberg"
 	},
 	"Actors": {
-		"SS": [
-			"Jeff Goldblum",
-			"Sam Neill"
+		"L": [
+			{"S": "Jeff Goldblum"},
+			{"S": "Sam Neill"}
 		]
 	},
 	"Plot": {
