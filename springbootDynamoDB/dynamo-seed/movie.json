@@ -1,0 +1,23 @@
+{
+	"FilmId": 1,
+	"Title": "Jurassic Park",
+	"Year": "1993",
+	"Rated": "Approved",
+	"Released": "11 June 1993",
+	"Runtime": "2 Hrs",
+	"Genre": [
+		"Action",
+		"Adventure",
+		"Sci-Fi"
+	],
+	"Director": "Steven Spielberg",
+	"Actors": [
+		"Jeff Goldblum",
+		"Sam Neill"
+	],
+	"Plot": "A pragmatic paleontologist touring an almost complete theme park on an island in Central America is tasked with protecting a couple of kids after a power failure causes the park's cloned dinosaurs to run loose. Huge advancements in scientific technology have enabled a mogul to create an island full of living dinosaurs.",
+	"Language": "English",
+	"Country": "USA",
+	"Awards": "Won 3 Oscars. Another 39 wins and 27 nominations.",
+	"imdbRating": "8.1"
+}
