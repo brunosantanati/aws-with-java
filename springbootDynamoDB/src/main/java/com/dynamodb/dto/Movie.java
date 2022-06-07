@@ -57,7 +57,7 @@ public class Movie {
 		this.title = title;
 	}
 
-	@DynamoDBAttribute(attributeName = "ReleasedYear")
+	@DynamoDBAttribute(attributeName = "Year")
 	public String getReleaseYear() {
 		return releaseYear;
 	}
