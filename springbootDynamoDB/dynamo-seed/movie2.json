@@ -1,0 +1,51 @@
+{
+	"FilmId": {
+    	"S": "2"
+  	},
+	"Title": {
+		"S": "Jurassic World: O Mundo dos Dinossauros"
+	},
+	"Year": {
+		"S": "2015"
+	},
+	"Rated": {
+		"S": "Approved"
+	},
+	"Released": {
+		"S": "11 June 2015"
+	},
+	"Runtime": {
+		"S": "2 Hrs"
+	},
+	"Genre": {
+		"L": [
+			{"S": "Action"},
+			{"S": "Adventure"},
+			{"S": "Sci-Fi"}
+		]
+	},
+	"Director": {
+		"S": "Colin Trevorrow"
+	},
+	"Actors": {
+		"L": [
+			{"S": "Chris Pratt"},
+			{"S": "Bryce Dallas Howard"}
+		]
+	},
+	"Plot": {
+		"S": "Set 22 years after the events of Jurassic Park, Jurassic World takes place on the same fictional island of Isla Nublar, located off the Pacific coast of Costa Rica. A successful theme park of cloned dinosaurs, dubbed Jurassic World, has operated on the island for years, bringing John Hammond's dream to fruition."	
+	},
+	"Language": {
+		"S": "English"
+	},
+	"Country": {
+		"S": "USA"
+	},
+	"Awards": {
+		"S": "Best Action Movie."
+	},
+	"imdbRating": {
+		"S": "8.0"
+	}
+}
