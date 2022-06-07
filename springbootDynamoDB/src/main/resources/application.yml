@@ -1,7 +1,7 @@
 
 aws:
-  access-key: "AKIAJMMYMHBAO2QUZVKQ"
-  secret-key: "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"
+  access-key: ${AWS_ACCESS_KEY}
+  secret-key: ${AWS_SECRET_KEY}
   dynamodb:
     #endpoint: "http://localhost:8000"
    
