@@ -41,8 +41,8 @@ public class MovieDynamoRepository {
 
 		Table table = dynamoDB.getTable("movie");
 
-		QuerySpec spec = new QuerySpec().withKeyConditionExpression("FilmId = :v_id")
-				.withValueMap(new ValueMap().withString(":v_id", key));
+		QuerySpec spec = new QuerySpec().withKeyConditionExpression("FilmId = :film_id")
+				.withValueMap(new ValueMap().withString(":film_id", key));
 
 		ItemCollection<QueryOutcome> items = table.query(spec);
 
