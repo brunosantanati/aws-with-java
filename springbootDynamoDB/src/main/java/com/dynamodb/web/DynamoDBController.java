@@ -18,6 +18,15 @@ import com.dynamodb.service.MovieSearchService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
+/*
+ * Some useful links:
+ * https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.html
+ * https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryingJavaDocumentAPI.html
+ * https://stackoverflow.com/questions/67429928/dynamodb-itemcollectionqueryoutcome-to-java-object
+ * https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBMapper.html
+ * https://www.tutorialspoint.com/dynamodb/dynamodb_batch_retrieve.htm
+ */
+
 @RestController
 @RequestMapping("movies")
 public class DynamoDBController {
