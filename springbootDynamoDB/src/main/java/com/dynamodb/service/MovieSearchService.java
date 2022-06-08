@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.dynamodb.dto.Movie;
 import com.dynamodb.repositories.MovieDynamoRepository;
 import com.dynamodb.repositories.MovieRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
 @Service
 public class MovieSearchService {
@@ -25,8 +27,8 @@ public class MovieSearchService {
         return StreamSupport.stream(movieRepository.findAll().spliterator(), true).collect(Collectors.toList());
     }
 	
-	public void findMovieById(String filmId) {
-		movieDynamoRepository.findByKey(filmId);
+	public List<Movie> findMovieById(String filmId) throws JsonMappingException, JsonProcessingException {
+		return movieDynamoRepository.findByKey(filmId);
 	}
 
 }

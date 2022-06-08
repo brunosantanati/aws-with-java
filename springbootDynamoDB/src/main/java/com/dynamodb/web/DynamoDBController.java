@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dynamodb.dto.Movie;
 import com.dynamodb.service.MovieSearchService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
 @RestController
 @RequestMapping("movies")
@@ -42,8 +44,9 @@ public class DynamoDBController {
 	}
 	
 	@RequestMapping(value = "/{filmId}", method = RequestMethod.GET)
-	public void retrieveMovieById(@PathVariable String filmId) {
-		movieSearchService.findMovieById(filmId);
+	public ResponseEntity<List<Movie>> retrieveMovieById(@PathVariable String filmId) throws JsonMappingException, JsonProcessingException {
+		List<Movie> movies = movieSearchService.findMovieById(filmId);
+		return new ResponseEntity<List<Movie>>(movies, HttpStatus.OK);
 	}
 
 }
