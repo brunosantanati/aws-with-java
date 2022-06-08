@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 
 //import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 //import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
@@ -57,6 +59,19 @@ public class MovieDynamoRepository {
 		}
 		
 		return movies;
+
+	}
+	
+	public List<Movie> findMovieByKey(String key){
+		DynamoDBMapper mapper = new DynamoDBMapper(client);
+		
+		Movie movieToSearch = new Movie();
+		movieToSearch.setFilmId(key);
+		
+		DynamoDBQueryExpression<Movie> queryExpression = new DynamoDBQueryExpression<Movie>()
+			    .withHashKeyValues(movieToSearch);
+		
+		return mapper.query(Movie.class, queryExpression);
 
 	}
 

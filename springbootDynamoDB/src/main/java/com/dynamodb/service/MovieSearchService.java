@@ -30,5 +30,9 @@ public class MovieSearchService {
 	public List<Movie> findMovieById(String filmId) throws JsonMappingException, JsonProcessingException {
 		return movieDynamoRepository.findByKey(filmId);
 	}
+	
+	public List<Movie> findMovieByKey(String filmId) throws JsonMappingException, JsonProcessingException {
+		return movieDynamoRepository.findMovieByKey(filmId);
+	}
 
 }

@@ -48,5 +48,11 @@ public class DynamoDBController {
 		List<Movie> movies = movieSearchService.findMovieById(filmId);
 		return new ResponseEntity<List<Movie>>(movies, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/filmId/{filmId}", method = RequestMethod.GET)
+	public ResponseEntity<List<Movie>> retrieveMovieByKey(@PathVariable String filmId) throws JsonMappingException, JsonProcessingException {
+		List<Movie> movies = movieSearchService.findMovieByKey(filmId);
+		return new ResponseEntity<List<Movie>>(movies, HttpStatus.OK);
+	}
 
 }
