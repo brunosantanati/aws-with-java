@@ -19,5 +19,9 @@ public class MusicService {
 	public void findArtistsByName() {
 		musicRepository.findArtistsByName();
 	}
+	
+	public void queryIndex() {
+		musicRepository.queryIndex();
+	}
 
 }

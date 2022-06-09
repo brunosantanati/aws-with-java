@@ -1,6 +1,8 @@
 {
 	"pk": { "S": "artist#u2" },
 	"sk": { "S": "artist#u2" },
+	"gsi1pk": { "S": "type#artist" },
+	"gsi1sk": { "S": "type#artist" },
 	"Type": { "S": "ARTIST" },
 	"ArtistName": { "S": "U2" },
 	"Nationality": { "S": "Ireland" }

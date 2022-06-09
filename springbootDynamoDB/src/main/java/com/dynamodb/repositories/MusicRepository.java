@@ -2,6 +2,7 @@ package com.dynamodb.repositories;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -9,10 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+//import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.BatchGetItemOutcome;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
+import com.amazonaws.services.dynamodbv2.document.Index;
 import com.amazonaws.services.dynamodbv2.document.Item;
+import com.amazonaws.services.dynamodbv2.document.ItemCollection;
+import com.amazonaws.services.dynamodbv2.document.QueryOutcome;
+import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.dynamodbv2.document.TableKeysAndAttributes;
+import com.amazonaws.services.dynamodbv2.document.spec.QuerySpec;
+import com.amazonaws.services.dynamodbv2.document.utils.NameMap;
+import com.amazonaws.services.dynamodbv2.document.utils.ValueMap;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.amazonaws.services.dynamodbv2.model.KeysAndAttributes;
 import com.amazonaws.services.dynamodbv2.model.QueryRequest;
@@ -25,6 +34,24 @@ public class MusicRepository {
 
 	@Autowired
 	private AmazonDynamoDB client;
+	
+	public void queryIndex() {
+		// AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard().build();
+		DynamoDB dynamoDB = new DynamoDB(client);
+
+		Table table = dynamoDB.getTable("music");
+		Index index = table.getIndex("gsi1");
+
+		QuerySpec spec = new QuerySpec().withKeyConditionExpression("#g = :v_gsi1pk")
+				.withNameMap(new NameMap().with("#g", "gsi1pk"))
+				.withValueMap(new ValueMap().withString(":v_gsi1pk", "type#artist"));
+
+		ItemCollection<QueryOutcome> items = index.query(spec);
+		Iterator<Item> iter = items.iterator();
+		while (iter.hasNext()) {
+			System.out.println(iter.next().toJSONPretty());
+		}
+	}
 	
 	public void findArtistsByName() {
 		try {

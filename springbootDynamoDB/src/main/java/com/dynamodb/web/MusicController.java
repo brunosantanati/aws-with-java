@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dynamodb.dto.Artist;
 import com.dynamodb.service.MusicService;
 
-//In the case of the music table, I've created a table with a partition key (pk), a sort key (sk) but with no indexes.
+//In the case of the music table, I've created a table with a partition key (pk), a sort key (sk) and a global secondary index (gsi1pk and gsi1sk).
 
 @RestController
 public class MusicController {
@@ -28,6 +28,12 @@ public class MusicController {
 	@RequestMapping(value = "/artists", method = RequestMethod.GET)
 	public ResponseEntity<String> getArtistsByName() {
 		musicService.findArtistsByName();
+		return new ResponseEntity<String>("OK", HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public ResponseEntity<String> queryIndex() {
+		musicService.queryIndex();
 		return new ResponseEntity<String>("OK", HttpStatus.OK);
 	}
 

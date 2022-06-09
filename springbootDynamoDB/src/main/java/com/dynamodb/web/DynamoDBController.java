@@ -40,6 +40,10 @@ import com.fasterxml.jackson.databind.JsonMappingException;
  * https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/batch-operation-document-api-java.html
  * https://www.tutorialspoint.com/dynamodb/dynamodb_batch_retrieve.htm
  * 
+ * Query an index
+ * https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSIJavaDocumentAPI.Example.html
+ * https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSIJavaDocumentAPI.html#GSIJavaDocumentAPI.QueryAnIndex
+ * 
  */
 
 //In the case of the movie table, I've created a table with a partition key (FilmId), no sort key and no indexes.

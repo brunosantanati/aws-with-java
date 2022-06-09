@@ -1,6 +1,8 @@
 {
 	"pk": { "S": "artist#sam_smith" },
 	"sk": { "S": "artist#sam_smith" },
+	"gsi1pk": { "S": "type#artist" },
+	"gsi1sk": { "S": "type#artist" },
 	"Type": { "S": "ARTIST" },
 	"ArtistName": { "S": "Sam Smith" },
 	"Nationality": { "S": "United Kingdom" }

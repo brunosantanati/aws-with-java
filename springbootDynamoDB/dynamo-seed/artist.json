@@ -1,6 +1,8 @@
 {
 	"pk": { "S": "artist#adele" },
 	"sk": { "S": "artist#adele" },
+	"gsi1pk": { "S": "type#artist" },
+	"gsi1sk": { "S": "type#artist" },
 	"Type": { "S": "ARTIST" },
 	"ArtistName": { "S": "Adele" },
 	"Nationality": { "S": "UK" }
