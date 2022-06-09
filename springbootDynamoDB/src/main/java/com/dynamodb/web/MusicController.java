@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dynamodb.dto.Artist;
 import com.dynamodb.service.MusicService;
 
+//In the case of the music table, I've created a table with a partition key (pk), a sort key (sk) but with no indexes.
+
 @RestController
 public class MusicController {
 	

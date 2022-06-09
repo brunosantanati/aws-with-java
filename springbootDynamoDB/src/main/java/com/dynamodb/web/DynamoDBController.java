@@ -36,6 +36,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
  * https://stackoverflow.com/questions/56166332/what-is-the-difference-between-partition-key-and-sort-key-in-amazon-dynamodb
  */
 
+//In the case of the movie table, I've created a table with a partition key (FilmId), no sort key and no indexes.
+
 @RestController
 @RequestMapping("movies")
 public class DynamoDBController {
