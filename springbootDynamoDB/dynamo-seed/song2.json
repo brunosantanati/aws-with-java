@@ -1,0 +1,8 @@
+{
+	"pk": { "S": "artist#adele" },
+	"sk": { "S": "song#adele#set_fire_to_the_rain" },
+	"Type": { "S": "SONG" },
+	"ArtistName": { "S": "Adele" },
+	"SongName": { "S": "Set fire to the rain" },
+	"AlbumTitle": { "S": "21" }
+}

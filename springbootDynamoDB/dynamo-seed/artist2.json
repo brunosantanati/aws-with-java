@@ -1,0 +1,7 @@
+{
+	"pk": { "S": "artist#u2" },
+	"sk": { "S": "artist#u2" },
+	"Type": { "S": "ARTIST" },
+	"ArtistName": { "S": "U2" },
+	"Nationality": { "S": "Ireland" }
+}

@@ -1,0 +1,7 @@
+{
+	"pk": { "S": "artist#adele" },
+	"sk": { "S": "artist#adele" },
+	"Type": { "S": "ARTIST" },
+	"ArtistName": { "S": "Adele" },
+	"Nationality": { "S": "UK" }
+}
