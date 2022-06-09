@@ -1,18 +1,29 @@
 package com.dynamodb.dto;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIgnore;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 
 @DynamoDBTable(tableName = "music")
 public class Artist {
 	
 	private String name;
 	private String nationality;
-	private List<Song> songs;
+	private List<Song> songs = new ArrayList<>();
 	
+	public Artist() {
+	}
+
+	public Artist(String name, String nationality) {
+		this.name = name;
+		this.nationality = nationality;
+	}
+
 	@DynamoDBAttribute(attributeName = "ArtistName")
 	public String getName() {
 		return name;
@@ -38,6 +49,12 @@ public class Artist {
 	
 	public void setSongs(List<Song> songs) {
 		this.songs = songs;
+	}
+
+	public static Artist attributeMapToArtist(Map<String, AttributeValue> attributeMap) {
+		String name = attributeMap.get("ArtistName").getS();
+		String nationality = attributeMap.get("Nationality").getS();
+		return new Artist(name, nationality);
 	}
 
 }
