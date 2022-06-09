@@ -24,7 +24,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
  * https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryingJavaDocumentAPI.html
  * https://stackoverflow.com/questions/67429928/dynamodb-itemcollectionqueryoutcome-to-java-object
  * https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBMapper.html
- * https://www.tutorialspoint.com/dynamodb/dynamodb_batch_retrieve.htm
  * 
  * DynamoDB Partition Key vs Sort Key – What’s the Difference?
  * https://beabetterdev.com/2022/02/07/dynamodb-partition-key-vs-sort-key/
@@ -34,6 +33,13 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 
  * What is the difference between partition key and sort key in amazon dynamodb?
  * https://stackoverflow.com/questions/56166332/what-is-the-difference-between-partition-key-and-sort-key-in-amazon-dynamodb
+ * 
+ * Batch operation
+ * https://stackoverflow.com/questions/42893125/query-multiple-partition-keys-at-same-time-dynamodb-node
+ * https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_BatchGetItem.html
+ * https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/batch-operation-document-api-java.html
+ * https://www.tutorialspoint.com/dynamodb/dynamodb_batch_retrieve.htm
+ * 
  */
 
 //In the case of the movie table, I've created a table with a partition key (FilmId), no sort key and no indexes.

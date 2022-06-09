@@ -24,5 +24,11 @@ public class MusicController {
 		Artist artist = musicService.findArtistByName(artistName);
 		return new ResponseEntity<Artist>(artist, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/artists", method = RequestMethod.GET)
+	public ResponseEntity<String> getArtistsByName() {
+		musicService.findArtistsByName();
+		return new ResponseEntity<String>("OK", HttpStatus.OK);
+	}
 
 }

@@ -15,5 +15,9 @@ public class MusicService {
 	public Artist findArtistByName(String name) {
 		return musicRepository.findArtistByName(name);
 	}
+	
+	public void findArtistsByName() {
+		musicRepository.findArtistsByName();
+	}
 
 }
