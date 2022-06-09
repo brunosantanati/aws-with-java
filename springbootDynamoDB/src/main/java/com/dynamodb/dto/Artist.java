@@ -57,4 +57,9 @@ public class Artist {
 		return new Artist(name, nationality);
 	}
 
+	@Override
+	public String toString() {
+		return "Artist [name=" + name + ", nationality=" + nationality + ", songs=" + songs + "]";
+	}
+
 }

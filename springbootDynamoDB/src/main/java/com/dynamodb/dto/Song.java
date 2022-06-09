@@ -55,4 +55,9 @@ public class Song {
 		return new Song(artistName, songName, albumTitle);
 	}
 
+	@Override
+	public String toString() {
+		return "Song [artistName=" + artistName + ", songName=" + songName + ", albumTitle=" + albumTitle + "]";
+	}
+
 }
