@@ -1,0 +1,7 @@
+{
+	"pk": { "S": "artist#sam_smith" },
+	"sk": { "S": "artist#sam_smith" },
+	"Type": { "S": "ARTIST" },
+	"ArtistName": { "S": "Sam Smith" },
+	"Nationality": { "S": "United Kingdom" }
+}

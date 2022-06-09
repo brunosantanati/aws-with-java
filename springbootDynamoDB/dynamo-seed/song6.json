@@ -1,0 +1,8 @@
+{
+	"pk": { "S": "artist#sam_smith" },
+	"sk": { "S": "song#sam_smith#im_not_the_only_one" },
+	"Type": { "S": "SONG" },
+	"ArtistName": { "S": "Sam Smith" },
+	"SongName": { "S": "I'm Not the Only One" },
+	"AlbumTitle": { "S": "In the Lonely Hour" }
+}

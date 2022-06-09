@@ -1,0 +1,8 @@
+{
+	"pk": { "S": "artist#sam_smith" },
+	"sk": { "S": "song#sam_smith#too_good_at_goodbyes" },
+	"Type": { "S": "SONG" },
+	"ArtistName": { "S": "Sam Smith" },
+	"SongName": { "S": "Too Good at Goodbyes" },
+	"AlbumTitle": { "S": "The Thrill of It All" }
+}
