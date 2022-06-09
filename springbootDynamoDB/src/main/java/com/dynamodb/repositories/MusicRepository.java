@@ -36,41 +36,33 @@ public class MusicRepository {
 		
 		List<Map<String,AttributeValue>> items = query.getItems();
 		
-		List<Artist> results = buildArtistsFromQueryResult(items);
-		
-		return results.get(0);
+		return buildArtistFromQueryResult(items);
 	}
 	
-	private List<Artist> buildArtistsFromQueryResult(List<Map<String,AttributeValue>> items){
-		Map<String, Artist> artists = new HashMap<>();
-		Map<String, Song> songs = new HashMap<>();
+	private Artist buildArtistFromQueryResult(List<Map<String,AttributeValue>> items){
+		List<Artist> artists = new ArrayList<>();
+		List<Song> songs = new ArrayList<>();
 		
 		items.forEach(item -> {
 			switch (item.get("Type").getS()) {
 			case "ARTIST":
 				Artist artist = Artist.attributeMapToArtist(item);
 				if(artist != null) {
-					artists.put(artist.getName(), artist);
+					artists.add(artist);
 				}
 				break;
 			case "SONG":
 				Song song = Song.attributeMapToSong(item);
 				if(song != null) {
-					songs.put(song.getArtistName(), song);
+					songs.add(song);
 				}
 				break;
 			}
 		});
 		
-		songs.forEach((key, value) -> {
-			 String artistName = key;
-			 Song song = value;
-			 if(artists.get(artistName) != null){
-				 artists.get(artistName).getSongs().add(song);
-			 }
-		});
+		artists.get(0).setSongs(songs);
 		
-		return new ArrayList<Artist>(artists.values());
+		return artists.get(0);
 	}
 
 }
