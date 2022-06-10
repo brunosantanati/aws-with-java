@@ -9,6 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Repository;
@@ -48,6 +49,23 @@ public class MusicRepository {
 	
 	@Cacheable(cacheNames = {"artists"})
 	public List<Artist> queryIndex() throws JsonMappingException, JsonProcessingException {
+		return getArtists();
+	}
+	
+	@Scheduled(fixedRateString = "30000", initialDelay = 30000)
+	@CacheEvict(cacheNames = {"artists"}, allEntries = true, beforeInvocation = true)
+	public void evictCache() throws JsonMappingException, JsonProcessingException {
+		System.out.println("############ Evicting cache");
+		cacheArtists();
+	}
+	
+	@CachePut(cacheNames = {"artists"})
+	public List<Artist> cacheArtists() throws JsonMappingException, JsonProcessingException {
+		System.out.println("############ Seeding cache");
+		return getArtists();
+	}
+	
+	private List<Artist> getArtists() throws JsonProcessingException, JsonMappingException {
 		List<Artist> artists = new ArrayList<>();
 		
 		// AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard().build();
@@ -70,12 +88,6 @@ public class MusicRepository {
 		}
 		
 		return artists;
-	}
-	
-	@Scheduled(fixedRateString = "10000", initialDelay = 10000)
-	@CacheEvict(cacheNames = {"artists"}, allEntries = true, beforeInvocation = true)
-	public void evictCache() {
-		System.out.println("############ Evicting cache");
 	}
 	
 	public void findArtistsByName() {
