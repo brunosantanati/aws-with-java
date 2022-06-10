@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
@@ -33,6 +35,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Repository
+@CacheConfig(cacheNames = {"artists"})
 public class MusicRepository {
 
 	@Autowired
@@ -41,6 +44,7 @@ public class MusicRepository {
 	@Autowired
 	private ObjectMapper objectMapper;
 	
+	@Cacheable
 	public List<Artist> queryIndex() throws JsonMappingException, JsonProcessingException {
 		List<Artist> artists = new ArrayList<>();
 		
