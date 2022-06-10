@@ -8,7 +8,9 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Repository;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
@@ -44,7 +46,7 @@ public class MusicRepository {
 	@Autowired
 	private ObjectMapper objectMapper;
 	
-	@Cacheable
+	@Cacheable(cacheNames = {"artists"})
 	public List<Artist> queryIndex() throws JsonMappingException, JsonProcessingException {
 		List<Artist> artists = new ArrayList<>();
 		
@@ -68,6 +70,12 @@ public class MusicRepository {
 		}
 		
 		return artists;
+	}
+	
+	@Scheduled(fixedRateString = "10000", initialDelay = 10000)
+	@CacheEvict(cacheNames = {"artists"}, allEntries = true, beforeInvocation = true)
+	public void evictCache() {
+		System.out.println("############ Evicting cache");
 	}
 	
 	public void findArtistsByName() {
