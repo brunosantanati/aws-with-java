@@ -8,8 +8,11 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIgnore;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @DynamoDBTable(tableName = "music")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Artist {
 	
 	private String name;
@@ -25,6 +28,7 @@ public class Artist {
 	}
 
 	@DynamoDBAttribute(attributeName = "ArtistName")
+	@JsonProperty("ArtistName")
 	public String getName() {
 		return name;
 	}
@@ -34,6 +38,7 @@ public class Artist {
 	}
 	
 	@DynamoDBAttribute(attributeName = "Nationality")
+	@JsonProperty("Nationality")
 	public String getNationality() {
 		return nationality;
 	}

@@ -28,6 +28,9 @@ import com.amazonaws.services.dynamodbv2.model.QueryRequest;
 import com.amazonaws.services.dynamodbv2.model.QueryResult;
 import com.dynamodb.dto.Artist;
 import com.dynamodb.dto.Song;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Repository
 public class MusicRepository {
@@ -35,7 +38,12 @@ public class MusicRepository {
 	@Autowired
 	private AmazonDynamoDB client;
 	
-	public void queryIndex() {
+	@Autowired
+	private ObjectMapper objectMapper;
+	
+	public List<Artist> queryIndex() throws JsonMappingException, JsonProcessingException {
+		List<Artist> artists = new ArrayList<>();
+		
 		// AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard().build();
 		DynamoDB dynamoDB = new DynamoDB(client);
 
@@ -49,8 +57,13 @@ public class MusicRepository {
 		ItemCollection<QueryOutcome> items = index.query(spec);
 		Iterator<Item> iter = items.iterator();
 		while (iter.hasNext()) {
-			System.out.println(iter.next().toJSONPretty());
+			String artistJson = iter.next().toJSONPretty();
+			System.out.println(artistJson);
+			Artist artist = objectMapper.readValue(artistJson, Artist.class);
+			artists.add(artist);
 		}
+		
+		return artists;
 	}
 	
 	public void findArtistsByName() {
