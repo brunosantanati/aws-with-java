@@ -50,6 +50,9 @@ import com.fasterxml.jackson.databind.JsonMappingException;
  * https://www.baeldung.com/spring-data-testing-cacheable
  * https://stackoverflow.com/questions/57083251/using-cacheable-spring-annotation-and-manually-add-to-infinispan-cache
  * 
+ * Someone trying to do the same thing
+ * https://stackoverflow.com/questions/54718564/can-we-add-spring-boot-cacheable-method-inside-scheduled-cache-evict-method-for
+ * 
  * The @Scheduled Annotation in Spring
  * https://www.baeldung.com/spring-scheduled-tasks
  * 
