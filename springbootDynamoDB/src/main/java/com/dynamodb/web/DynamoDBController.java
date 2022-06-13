@@ -44,6 +44,15 @@ import com.fasterxml.jackson.databind.JsonMappingException;
  * https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSIJavaDocumentAPI.Example.html
  * https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSIJavaDocumentAPI.html#GSIJavaDocumentAPI.QueryAnIndex
  * 
+ * Spring Cache
+ * https://www.baeldung.com/spring-cache-tutorial
+ * https://www.baeldung.com/spring-boot-evict-cache
+ * https://www.baeldung.com/spring-data-testing-cacheable
+ * https://stackoverflow.com/questions/57083251/using-cacheable-spring-annotation-and-manually-add-to-infinispan-cache
+ * 
+ * The @Scheduled Annotation in Spring
+ * https://www.baeldung.com/spring-scheduled-tasks
+ * 
  */
 
 //In the case of the movie table, I've created a table with a partition key (FilmId), no sort key and no indexes.
