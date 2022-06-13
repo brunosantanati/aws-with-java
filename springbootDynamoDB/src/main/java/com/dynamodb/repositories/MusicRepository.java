@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.Cache;
-import org.springframework.cache.CacheManager;
+//import org.springframework.cache.Cache;
+//import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 //import org.springframework.cache.annotation.CachePut;
@@ -49,8 +49,8 @@ public class MusicRepository {
 	@Autowired
 	private ObjectMapper objectMapper;
 	
-	@Autowired
-	private CacheManager cacheManager;
+	//@Autowired
+	//private CacheManager cacheManager;
 	
 	@Cacheable(cacheNames = {"artists"})
 	public List<Artist> queryIndex() throws JsonMappingException, JsonProcessingException {
@@ -64,8 +64,10 @@ public class MusicRepository {
 		//cacheArtists();
 		
 		System.out.println("############ Seeding cache");
-		Cache cache = cacheManager.getCache("artists");
-		cache.put("artists", getArtists());
+		//Cache cache = cacheManager.getCache("artists");
+		//cache.put("artists", getArtists());
+
+		queryIndex();
 	}
 	
 	/*
