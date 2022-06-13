@@ -19,6 +19,4 @@ spring:
     dynamodb:
       entity2ddl:
         auto: validate
-  main:
-    allow-circular-references: true
 
