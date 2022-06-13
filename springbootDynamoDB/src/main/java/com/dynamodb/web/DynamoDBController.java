@@ -52,6 +52,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
  * 
  * Someone trying to do the same thing
  * https://stackoverflow.com/questions/54718564/can-we-add-spring-boot-cacheable-method-inside-scheduled-cache-evict-method-for
+ * https://stackoverflow.com/questions/36860870/calling-cacheevict-and-cacheable-annotation-on-a-single-method
  * 
  * The @Scheduled Annotation in Spring
  * https://www.baeldung.com/spring-scheduled-tasks
