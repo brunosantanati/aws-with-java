@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.cache.Cache;
-//import org.springframework.cache.CacheManager;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
+//import org.springframework.cache.annotation.CacheEvict;
 //import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -49,8 +49,8 @@ public class MusicRepository {
 	@Autowired
 	private ObjectMapper objectMapper;
 	
-	//@Autowired
-	//private CacheManager cacheManager;
+	@Autowired
+	private CacheManager cacheManager;
 	
 	@Cacheable(cacheNames = {"artists"})
 	public List<Artist> queryIndex() throws JsonMappingException, JsonProcessingException {
@@ -58,16 +58,17 @@ public class MusicRepository {
 	}
 	
 	@Scheduled(fixedRateString = "30000", initialDelay = 30000)
-	@CacheEvict(cacheNames = {"artists"}, allEntries = true, beforeInvocation = true)
+	//@CacheEvict(cacheNames = {"artists"}, allEntries = true, beforeInvocation = true)
 	public void evictCache() throws JsonMappingException, JsonProcessingException {
 		System.out.println("############ Evicting cache");
+		cacheManager.getCache("artists").clear();
 		//cacheArtists();
 		
 		System.out.println("############ Seeding cache");
-		//Cache cache = cacheManager.getCache("artists");
-		//cache.put("artists", getArtists());
+		Cache cache = cacheManager.getCache("artists");
+		cache.put("artists", getArtists());
 
-		queryIndex();
+		//queryIndex();
 	}
 	
 	/*
