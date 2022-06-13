@@ -57,6 +57,9 @@ import com.fasterxml.jackson.databind.JsonMappingException;
  * The @Scheduled Annotation in Spring
  * https://www.baeldung.com/spring-scheduled-tasks
  * 
+ * Run method on Spring Boot startup
+ * https://stacktraceguru.com/springboot/run-method-on-startup
+ * 
  */
 
 //In the case of the movie table, I've created a table with a partition key (FilmId), no sort key and no indexes.
