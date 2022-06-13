@@ -61,7 +61,8 @@ public class MusicRepository {
 	//@CacheEvict(cacheNames = {"artists"}, allEntries = true, beforeInvocation = true)
 	public void evictCache() throws JsonMappingException, JsonProcessingException {
 		System.out.println("############ Evicting cache");
-		cacheManager.getCache("artists").clear();
+		cacheManager.getCacheNames().stream()
+	      .forEach(cacheName -> cacheManager.getCache(cacheName).clear());
 		//cacheArtists();
 		
 		System.out.println("############ Seeding cache");
