@@ -35,6 +35,7 @@ import com.amazonaws.services.dynamodbv2.model.QueryRequest;
 import com.amazonaws.services.dynamodbv2.model.QueryResult;
 import com.dynamodb.dto.Artist;
 import com.dynamodb.dto.Song;
+import com.dynamodb.service.MusicService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -52,6 +53,9 @@ public class MusicRepository {
 	//@Autowired
 	//private CacheManager cacheManager;
 	
+	@Autowired
+	MusicService musicService;
+	
 	@Cacheable(cacheNames = {"artists"})
 	public List<Artist> queryIndex() throws JsonMappingException, JsonProcessingException {
 		return getArtists();
@@ -67,7 +71,9 @@ public class MusicRepository {
 		//Cache cache = cacheManager.getCache("artists");
 		//cache.put("artists", getArtists());
 
-		queryIndex();
+		//queryIndex();
+		
+		musicService.queryIndex();
 	}
 	
 	/*
