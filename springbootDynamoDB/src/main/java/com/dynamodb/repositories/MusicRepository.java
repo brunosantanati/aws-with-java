@@ -58,7 +58,7 @@ public class MusicRepository {
 	}
 	
 	@Scheduled(fixedRateString = "30000", initialDelay = 30000)
-	@CacheEvict(cacheNames = {"artists"}, allEntries = true, beforeInvocation = false)
+	@CacheEvict(cacheNames = {"artists"}, allEntries = true, beforeInvocation = true)
 	public void evictCache() throws JsonMappingException, JsonProcessingException {
 		System.out.println("############ Evicting cache");
 		//cacheArtists();
