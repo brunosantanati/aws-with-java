@@ -44,6 +44,12 @@ import com.fasterxml.jackson.databind.JsonMappingException;
  * https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSIJavaDocumentAPI.Example.html
  * https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSIJavaDocumentAPI.html#GSIJavaDocumentAPI.QueryAnIndex
  * 
+ * DynamoDB Mapper GSI Query Example in Java
+ * https://beabetterdev.com/2021/10/24/dynamodb-mapper-gsi-query-example-in-java/
+ * 
+ * Java Annotations for DynamoDB
+ * https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBMapper.Annotations.html
+ * 
  * Spring Cache
  * https://www.baeldung.com/spring-cache-tutorial
  * https://www.baeldung.com/spring-boot-evict-cache

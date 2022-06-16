@@ -27,5 +27,9 @@ public class MusicService {
 	public List<Artist> queryIndex() throws JsonMappingException, JsonProcessingException {
 		return musicRepository.queryIndex();
 	}
+	
+	public List<Artist> queryIndex2() {
+		return musicRepository.queryIndex2();
+	}
 
 }

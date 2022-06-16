@@ -12,10 +12,12 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
-import org.springframework.scheduling.annotation.Scheduled;
+//import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Repository;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 //import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.BatchGetItemOutcome;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
@@ -53,7 +55,7 @@ public class MusicRepository {
 		return getArtists();
 	}
 	
-	@Scheduled(fixedRateString = "30000", initialDelay = 30000)
+	//@Scheduled(fixedRateString = "30000", initialDelay = 30000)
 	@Caching(evict = { @CacheEvict(cacheNames = {"artists"}, allEntries = true, beforeInvocation = true) }, 
 		put = { @CachePut(cacheNames = {"artists"}) })
 	public List<Artist> evictCache() throws JsonMappingException, JsonProcessingException {
@@ -85,6 +87,22 @@ public class MusicRepository {
 		}
 		
 		return artists;
+	}
+	
+	public List<Artist> queryIndex2(){
+		DynamoDBMapper mapper = new DynamoDBMapper(client);
+		
+		Artist artist = new Artist();
+		artist.setGsi1pk("type#artist");
+		
+		DynamoDBQueryExpression<Artist> queryExpression =
+                new DynamoDBQueryExpression<Artist>()
+                .withHashKeyValues(artist)
+                .withIndexName("gsi1")
+                .withConsistentRead(false);
+
+
+        return mapper.query(Artist.class, queryExpression);
 	}
 	
 	public void findArtistsByName() {
