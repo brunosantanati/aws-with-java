@@ -54,6 +54,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
  * https://www.baeldung.com/spring-cache-tutorial
  * https://www.baeldung.com/spring-boot-evict-cache
  * https://www.baeldung.com/spring-data-testing-cacheable
+ * https://github.com/eugenp/tutorials/blob/master/spring-caching/src/test/java/com/baeldung/springdatacaching/repositories/BookRepositoryCachingIntegrationTest.java
  * https://stackoverflow.com/questions/57083251/using-cacheable-spring-annotation-and-manually-add-to-infinispan-cache
  * 
  * Someone trying to do the same thing
