@@ -105,6 +105,37 @@ public class MusicRepository {
         return mapper.query(Artist.class, queryExpression);
 	}
 	
+	public List<Artist> queryIndex3() {
+		List<Artist> artists = new ArrayList<>();
+		
+		DynamoDB dynamoDB = new DynamoDB(client);
+
+		Table table = dynamoDB.getTable("music");
+		Index index = table.getIndex("gsi1");
+
+		QuerySpec spec = new QuerySpec().withKeyConditionExpression("#g = :v_gsi1pk")
+				.withNameMap(new NameMap().with("#g", "gsi1pk"))
+				.withValueMap(new ValueMap().withString(":v_gsi1pk", "type#artist"));
+
+		ItemCollection<QueryOutcome> items = index.query(spec);
+		Iterator<Item> iter = items.iterator();
+		
+		System.out.println("Converting using a map of attributes");
+		while (iter.hasNext()) {
+			Item item = iter.next();
+			
+			Map<String, Object> attributesMap = item.asMap();
+			
+			String artistName = (String) attributesMap.get("ArtistName");
+			String nationality = (String) attributesMap.get("Nationality");
+			
+			Artist artist = new Artist(artistName, nationality);
+			artists.add(artist);
+		}
+		
+		return artists;
+	}
+	
 	public void findArtistsByName() {
 		try {
 

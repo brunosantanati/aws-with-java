@@ -31,5 +31,9 @@ public class MusicService {
 	public List<Artist> queryIndex2() {
 		return musicRepository.queryIndex2();
 	}
+	
+	public List<Artist> queryIndex3() {
+		return musicRepository.queryIndex3();
+	}
 
 }

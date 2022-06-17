@@ -46,5 +46,11 @@ public class MusicController {
 		List<Artist> artists = musicService.queryIndex2();
 		return new ResponseEntity<List<Artist>>(artists, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/index3", method = RequestMethod.GET)
+	public ResponseEntity<List<Artist>> queryIndex3() {
+		List<Artist> artists = musicService.queryIndex3();
+		return new ResponseEntity<List<Artist>>(artists, HttpStatus.OK);
+	}
 
 }
