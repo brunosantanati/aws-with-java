@@ -1,0 +1,10 @@
+{
+	"pk": { "S": "artist#u2" },
+	"sk": { "S": "song#u2#with_or_without_you" },
+	"gsi1pk": { "S": "type#song" },
+	"gsi1sk": { "S": "type#song" },
+	"Type": { "S": "SONG" },
+	"ArtistName": { "S": "U2" },
+	"SongName": { "S": "With or without you" },
+	"AlbumTitle": { "S": "The Joshua Tree" }
+}

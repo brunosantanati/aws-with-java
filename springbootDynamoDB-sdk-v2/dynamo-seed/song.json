@@ -1,0 +1,10 @@
+{
+	"pk": { "S": "artist#adele" },
+	"sk": { "S": "song#adele#rolling_in_the_deep" },
+	"gsi1pk": { "S": "type#song" },
+	"gsi1sk": { "S": "type#song" },
+	"Type": { "S": "SONG" },
+	"ArtistName": { "S": "Adele" },
+	"SongName": { "S": "Rolling in the Deep" },
+	"AlbumTitle": { "S": "21" }
+}

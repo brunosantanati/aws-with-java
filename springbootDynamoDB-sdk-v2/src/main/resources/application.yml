@@ -1,0 +1,20 @@
+
+aws:
+  access-key: ${AWS_ACCESS_KEY}
+  secret-key: ${AWS_SECRET_KEY}
+  dynamodb:
+    #endpoint: "http://localhost:8000"
+   
+cloud:
+  aws:
+    stack:
+      auto: false
+    region:
+      static: us-east-2
+
+spring:
+  data:
+    dynamodb:
+      entity2ddl:
+        auto: validate
+
