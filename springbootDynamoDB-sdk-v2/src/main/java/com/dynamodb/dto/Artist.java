@@ -4,17 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIgnore;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIndexHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBIndexRangeKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
-import com.amazonaws.services.dynamodbv2.model.AttributeValue;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 
 @DynamoDBTable(tableName = "music")
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -103,8 +97,8 @@ public class Artist {
 	}
 
 	public static Artist attributeMapToArtist(Map<String, AttributeValue> attributeMap) {
-		String name = attributeMap.get("ArtistName").getS();
-		String nationality = attributeMap.get("Nationality").getS();
+		String name = attributeMap.get("ArtistName").s();
+		String nationality = attributeMap.get("Nationality").s();
 		return new Artist(name, nationality);
 	}
 

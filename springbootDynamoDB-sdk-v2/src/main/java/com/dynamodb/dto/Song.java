@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
-import com.amazonaws.services.dynamodbv2.model.AttributeValue;
+import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 
 @DynamoDBTable(tableName = "music")
 public class Song {
@@ -49,9 +49,9 @@ public class Song {
 	}
 
 	public static Song attributeMapToSong(Map<String, AttributeValue> attributeMap) {
-		String artistName = attributeMap.get("ArtistName").getS();
-		String songName = attributeMap.get("SongName").getS();
-		String albumTitle = attributeMap.get("AlbumTitle").getS();
+		String artistName = attributeMap.get("ArtistName").s();
+		String songName = attributeMap.get("SongName").s();
+		String albumTitle = attributeMap.get("AlbumTitle").s();
 		return new Song(artistName, songName, albumTitle);
 	}
 

@@ -18,6 +18,15 @@ https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/migration.html
 
 What's different between the AWS SDK for Java 1.x and 2.x
 https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/migration-whats-different.html
+
+Using credentials
+https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials.html
+
+DynamoDB examples using SDK for Java 2.x
+https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/java_dynamodb_code_examples.html
+
+Java Annotations for DynamoDB
+https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBMapper.Annotations.html
 */
 
 @RestController
