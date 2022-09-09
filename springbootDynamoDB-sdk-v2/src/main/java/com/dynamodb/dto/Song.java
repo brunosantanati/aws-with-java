@@ -2,11 +2,10 @@ package com.dynamodb.dto;
 
 import java.util.Map;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 
-@DynamoDBTable(tableName = "music")
+@DynamoDbBean
 public class Song {
 	
 	private String artistName;
@@ -21,7 +20,6 @@ public class Song {
 		this.albumTitle = albumTitle;
 	}
 
-	@DynamoDBAttribute(attributeName = "ArtistName")
 	public String getArtistName() {
 		return artistName;
 	}
@@ -29,8 +27,7 @@ public class Song {
 	public void setArtistName(String artistName) {
 		this.artistName = artistName;
 	}
-	
-	@DynamoDBAttribute(attributeName = "SongName")
+
 	public String getSongName() {
 		return songName;
 	}
@@ -38,8 +35,7 @@ public class Song {
 	public void setSongName(String songName) {
 		this.songName = songName;
 	}
-	
-	@DynamoDBAttribute(attributeName = "AlbumTitle")
+
 	public String getAlbumTitle() {
 		return albumTitle;
 	}

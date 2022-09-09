@@ -1,6 +1,5 @@
 package com.dynamodb.config;
 
-import org.socialsignin.spring.data.dynamodb.repository.config.EnableDynamoDBRepositories;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +14,6 @@ import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import java.time.Duration;
 
 @Configuration
-@EnableDynamoDBRepositories(basePackages = "com.dynamodb.repositories")
 public class DynamoDBConfig {
 
     @Bean

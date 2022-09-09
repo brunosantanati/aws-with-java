@@ -1,18 +1,15 @@
 package com.dynamodb.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.*;
+import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.*;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
-
-@DynamoDBTable(tableName = "music")
+@DynamoDbBean
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-@JsonIgnoreProperties(value = {"pk", "sk", "gsi1pk", "gsi1sk"})
 public class Artist {
 	
 	private String pk;
@@ -31,7 +28,7 @@ public class Artist {
 		this.nationality = nationality;
 	}
 
-	@DynamoDBHashKey(attributeName = "pk")
+	@DynamoDbPartitionKey
 	public String getPk() {
 		return pk;
 	}
@@ -40,7 +37,7 @@ public class Artist {
 		this.pk = pk;
 	}
 	
-	@DynamoDBRangeKey(attributeName = "sk")
+	@DynamoDbSortKey
 	public String getSk() {
 		return sk;
 	}
@@ -49,7 +46,7 @@ public class Artist {
 		this.sk = sk;
 	}
 
-	@DynamoDBIndexHashKey(attributeName = "gsi1pk", globalSecondaryIndexName="gsi1")
+	@DynamoDbSecondaryPartitionKey(indexNames = {"gsi1"})
 	public String getGsi1pk() {
 		return gsi1pk;
 	}
@@ -58,7 +55,7 @@ public class Artist {
 		this.gsi1pk = gsi1pk;
 	}
 	
-	@DynamoDBIndexRangeKey(attributeName = "gsi1sk", globalSecondaryIndexName="gsi1")
+	@DynamoDbSecondarySortKey(indexNames = {"gsi1"})
 	public String getGsi1sk() {
 		return gsi1sk;
 	}
@@ -67,8 +64,6 @@ public class Artist {
 		this.gsi1sk = gsi1sk;
 	}
 
-	@DynamoDBAttribute(attributeName = "ArtistName")
-	@JsonProperty("ArtistName")
 	public String getName() {
 		return name;
 	}
@@ -76,9 +71,7 @@ public class Artist {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	@DynamoDBAttribute(attributeName = "Nationality")
-	@JsonProperty("Nationality")
+
 	public String getNationality() {
 		return nationality;
 	}
@@ -87,7 +80,7 @@ public class Artist {
 		this.nationality = nationality;
 	}
 	
-	@DynamoDBIgnore
+	@DynamoDbIgnore
 	public List<Song> getSongs() {
 		return songs;
 	}

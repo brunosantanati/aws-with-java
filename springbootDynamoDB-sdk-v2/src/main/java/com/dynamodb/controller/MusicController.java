@@ -27,6 +27,15 @@ https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/java_dynamodb_co
 
 Java Annotations for DynamoDB
 https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBMapper.Annotations.html
+
+How to migrate from DynamoDb Java SDK v1 to v2
+https://serhatcan.medium.com/how-to-migrate-from-dynamodb-java-sdk-v1-to-v2-2e3660729e05
+
+DynamoDBAttribute with DynamoDbEnhancedAsyncClient not working
+https://stackoverflow.com/questions/69966894/dynamodbattribute-with-dynamodbenhancedasyncclient-not-working
+
+DynamoDB Enhanced
+https://github.com/aws/aws-sdk-java-v2/blob/master/services-custom/dynamodb-enhanced/README.md
 */
 
 @RestController
