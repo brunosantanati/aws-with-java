@@ -8,7 +8,6 @@ import software.amazon.awssdk.services.dynamodb.DynamoDbClient
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue
 import software.amazon.awssdk.services.dynamodb.model.DynamoDbException
 import software.amazon.awssdk.services.dynamodb.model.QueryRequest
-import java.util.function.Consumer
 
 @Repository
 class MusicRepository {
@@ -59,7 +58,7 @@ class MusicRepository {
                 }
             }
         }
-        artists[0]!!.setSongs(songs)
+        artists[0]!!.addAllSongs(songs)
         return artists[0]
     }
 }

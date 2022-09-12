@@ -11,6 +11,6 @@ class MusicService {
 	@Autowired
 	var musicRepository: MusicRepository? = null
 	fun findArtistByName(name: String): Artist {
-		return musicRepository!!.findArtistByName(name) ?: Artist()
+		return musicRepository!!.findArtistByName(name) ?: Artist(name = "", nationality = "")
 	}
 }
