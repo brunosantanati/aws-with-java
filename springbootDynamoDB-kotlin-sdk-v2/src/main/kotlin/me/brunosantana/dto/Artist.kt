@@ -7,19 +7,38 @@ import software.amazon.awssdk.services.dynamodb.model.AttributeValue
 @DynamoDbBean
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 data class Artist(
-    @get:DynamoDbPartitionKey
-    val pk: String? = null,
+    @get:DynamoDbIgnore
+    val pkType: String,
+    @get:DynamoDbIgnore
+    val pkId: String,
     @get:DynamoDbSortKey
-    val sk: String? = null,
+    val sk: String,
     @get:DynamoDbSecondaryPartitionKey(indexNames = ["gsi1"])
-    val gsi1pk: String? = null,
+    val gsi1pk: String,
     @get:DynamoDbSecondarySortKey(indexNames = ["gsi1"])
-    val gsi1sk: String? = null,
+    val gsi1sk: String,
     val name: String,
     val nationality: String,
     @get:DynamoDbIgnore
     val songs: MutableList<Song> = mutableListOf()
 ) {
+    constructor(name: String, nationality: String) :
+            this(
+                pkType = "",
+                pkId = "",
+                sk = "",
+                gsi1pk = "",
+                gsi1sk = "",
+                name = name,
+                nationality = nationality,
+                songs = mutableListOf()
+            )
+
+    @DynamoDbPartitionKey
+    fun getPK(): String {
+        return "${pkType}#${pkId}"
+    }
+
     fun addAllSongs(songs: MutableList<Song>){
         this.songs.addAll(songs)
     }
