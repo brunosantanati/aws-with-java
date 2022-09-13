@@ -4,15 +4,20 @@ import me.brunosantana.dto.Artist
 import me.brunosantana.dto.Song
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
+import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient
+import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable
+import software.amazon.awssdk.enhanced.dynamodb.TableSchema
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue
 import software.amazon.awssdk.services.dynamodb.model.DynamoDbException
 import software.amazon.awssdk.services.dynamodb.model.QueryRequest
 
+
 @Repository
-class MusicRepository {
-    @Autowired
-    private val client: DynamoDbClient? = null
+class MusicRepository(
+    val client: DynamoDbClient,
+    val enhancedClient: DynamoDbEnhancedClient
+) {
     fun findArtistByName(name: String): Artist? {
         val partitionKeyName = "pk"
         val partitionKeyValue = "artist#$name"
@@ -29,7 +34,7 @@ class MusicRepository {
             .expressionAttributeValues(attrValues)
             .build()
         return try {
-            val response = client!!.query(queryReq)
+            val response = client.query(queryReq)
             val items = response.items()
             buildArtistFromQueryResponse(items)
         } catch (e: DynamoDbException) {
@@ -60,5 +65,15 @@ class MusicRepository {
         }
         artists[0]!!.addAllSongs(songs)
         return artists[0]
+    }
+
+    fun saveArtist(artist: Artist){
+        try {
+            val artistTable: DynamoDbTable<Artist> =
+                enhancedClient.table("music", TableSchema.fromBean(Artist::class.java))
+            artistTable.putItem(artist)
+        }catch (e: DynamoDbException){
+            e.printStackTrace()
+        }
     }
 }

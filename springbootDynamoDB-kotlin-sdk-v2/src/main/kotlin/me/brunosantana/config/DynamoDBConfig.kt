@@ -1,11 +1,13 @@
 package me.brunosantana.config
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider
 import software.amazon.awssdk.core.client.config.ClientOverrideConfiguration
+import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient
 import software.amazon.awssdk.http.apache.ApacheHttpClient
 import software.amazon.awssdk.http.apache.ProxyConfiguration
 import software.amazon.awssdk.regions.Region
@@ -37,5 +39,14 @@ class DynamoDBConfig {
             .overrideConfiguration(overrideConfig.build())
             .credentialsProvider(StaticCredentialsProvider.create(awsCredentials))
             .build()
+    }
+
+    @Bean
+    fun dynamoDbEnhancedClient(
+        @Autowired dynamoDbClient: DynamoDbClient
+    ): DynamoDbEnhancedClient{
+        return DynamoDbEnhancedClient.builder()
+            .dynamoDbClient(dynamoDbClient)
+            .build();
     }
 }

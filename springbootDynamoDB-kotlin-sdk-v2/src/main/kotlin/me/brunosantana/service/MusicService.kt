@@ -13,4 +13,8 @@ class MusicService {
 	fun findArtistByName(name: String): Artist {
 		return musicRepository!!.findArtistByName(name) ?: Artist(name = "", nationality = "")
 	}
+
+	fun saveArtist(artist: Artist){
+		musicRepository!!.saveArtist(artist)
+	}
 }
