@@ -1,6 +1,7 @@
 package me.brunosantana.controller
 
 import me.brunosantana.dto.Artist
+import me.brunosantana.dto.Song
 import me.brunosantana.service.MusicService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -54,6 +55,21 @@ class MusicController {
             songs = mutableListOf()
         )
         musicService!!.saveArtist(artist)
+        return ResponseEntity<String>("OK", HttpStatus.CREATED)
+    }
+
+    @RequestMapping(value = ["/artist/save-song/{songName}"], method = [RequestMethod.GET]) //it should be POST and get data from the request body, but it's easier and quicker to test it using GET in the browser. I'm focusing on testing aws sdk 2.x.
+    fun saveSong(@PathVariable songName: String): ResponseEntity<String> {
+        val song = Song(
+            pk = "artist#eminem",
+            sk = "song#eminem#song1",
+            gsi1pk = "type#song",
+            gsi1sk = "type#song",
+            artistName = "Eminem",
+            songName = songName,
+            albumTitle = "Eminem Album 1"
+        )
+        musicService!!.saveSong(song)
         return ResponseEntity<String>("OK", HttpStatus.CREATED)
     }
 }

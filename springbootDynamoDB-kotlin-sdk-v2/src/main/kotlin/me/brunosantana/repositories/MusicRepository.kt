@@ -76,4 +76,14 @@ class MusicRepository(
             e.printStackTrace()
         }
     }
+
+    fun saveSong(song: Song){
+        try {
+            val songTable: DynamoDbTable<Song> =
+                enhancedClient.table("music", TableSchema.fromBean(Song::class.java))
+            songTable.putItem(song)
+        }catch (e: DynamoDbException){
+            e.printStackTrace()
+        }
+    }
 }
