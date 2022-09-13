@@ -9,7 +9,7 @@ private const val TYPE = "SONG"
 
 @DynamoDbBean
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-@JsonIgnoreProperties(value = ["pk", "sk", "gsi1pk", "gsi1sk"])
+//@JsonIgnoreProperties(value = ["pk", "sk", "gsi1pk", "gsi1sk"])
 data class Song (
     @get:DynamoDbPartitionKey
     var pk: String,

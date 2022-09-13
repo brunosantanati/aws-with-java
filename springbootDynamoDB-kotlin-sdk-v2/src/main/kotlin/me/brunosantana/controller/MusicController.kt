@@ -1,5 +1,6 @@
 package me.brunosantana.controller
 
+import me.brunosantana.dto.ApiResponse
 import me.brunosantana.dto.Artist
 import me.brunosantana.dto.Song
 import me.brunosantana.service.MusicService
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController
@@ -42,34 +44,15 @@ class MusicController {
         return ResponseEntity<Artist>(artist, HttpStatus.OK)
     }
 
-    @RequestMapping(value = ["/artist/save/{artistName}"], method = [RequestMethod.GET]) //it should be POST and get data from the request body, but it's easier and quicker to test it using GET in the browser. I'm focusing on testing aws sdk 2.x.
-    fun saveArtist(@PathVariable artistName: String): ResponseEntity<String> {
-        val artist = Artist(
-            pkType = "artist",
-            pkId = artistName,
-            sk = "artist#$artistName",
-            gsi1pk = "type#artist",
-            gsi1sk = "type#artist",
-            name = artistName.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() },
-            nationality = "UK",
-            songs = mutableListOf()
-        )
+    @RequestMapping(value = ["/artist"], method = [RequestMethod.POST])
+    fun saveArtist(@RequestBody artist: Artist): ResponseEntity<ApiResponse> {
         musicService!!.saveArtist(artist)
-        return ResponseEntity<String>("OK", HttpStatus.CREATED)
+        return ResponseEntity<ApiResponse>(ApiResponse("Artist saved successfully"), HttpStatus.CREATED)
     }
 
-    @RequestMapping(value = ["/artist/save-song/{songName}"], method = [RequestMethod.GET]) //it should be POST and get data from the request body, but it's easier and quicker to test it using GET in the browser. I'm focusing on testing aws sdk 2.x.
-    fun saveSong(@PathVariable songName: String): ResponseEntity<String> {
-        val song = Song(
-            pk = "artist#eminem",
-            sk = "song#eminem#song1",
-            gsi1pk = "type#song",
-            gsi1sk = "type#song",
-            artistName = "Eminem",
-            songName = songName,
-            albumTitle = "Eminem Album 1"
-        )
+    @RequestMapping(value = ["/song"], method = [RequestMethod.POST])
+    fun saveSong(@RequestBody song: Song): ResponseEntity<ApiResponse> {
         musicService!!.saveSong(song)
-        return ResponseEntity<String>("OK", HttpStatus.CREATED)
+        return ResponseEntity<ApiResponse>(ApiResponse("Song saved successfully"), HttpStatus.CREATED)
     }
 }

@@ -1,7 +1,9 @@
 package me.brunosantana.dto
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonInclude
+import com.fasterxml.jackson.annotation.JsonProperty
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.*
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue
 
@@ -9,7 +11,7 @@ private const val TYPE = "ARTIST"
 
 @DynamoDbBean
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-@JsonIgnoreProperties(value = ["pk", "sk", "gsi1pk", "gsi1sk"])
+//@JsonIgnoreProperties(value = ["pk", "sk", "gsi1pk", "gsi1sk"])
 data class Artist(
     @get:DynamoDbIgnore
     val pkType: String,
@@ -54,10 +56,12 @@ data class Artist(
             )
 
     @DynamoDbPartitionKey
+    @JsonIgnore
     fun getPk(): String {
         return "${pkType}#${pkId}"
     }
 
+    @JsonProperty
     fun setPk(pk: String) {
         // Do nothing, this is a derived attribute
     }
