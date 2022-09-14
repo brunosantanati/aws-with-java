@@ -1,42 +1,31 @@
 package me.brunosantana.dto
 
-import com.fasterxml.jackson.annotation.JsonIgnore
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonInclude
-import com.fasterxml.jackson.annotation.JsonProperty
-import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.*
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbAttribute
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbIgnore
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue
 
 private const val TYPE = "ARTIST"
 
 @DynamoDbBean
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-//@JsonIgnoreProperties(value = ["pk", "sk", "gsi1pk", "gsi1sk"])
 data class Artist(
-    @get:DynamoDbIgnore
-    val pkType: String,
-    @get:DynamoDbIgnore
-    val pkId: String,
-    @get:DynamoDbSortKey
-    var sk: String,
-    @get:DynamoDbSecondaryPartitionKey(indexNames = ["gsi1"])
-    var gsi1pk: String,
-    @get:DynamoDbSecondarySortKey(indexNames = ["gsi1"])
-    var gsi1sk: String,
     @get:DynamoDbAttribute("ArtistName")
     var name: String,
     @get:DynamoDbAttribute("Nationality")
     var nationality: String,
     @get:DynamoDbIgnore
     val songs: MutableList<Song> = mutableListOf()
+): DynamoBaseModel(
+    pkType = "artist",
+    pkId = name.lowercase().replace(" ", "_"),
+    sk = "artist#${name.lowercase().replace(" ", "_")}",
+    gsi1pk = "type#artist",
+    gsi1sk = "type#artist",
 ) {
     constructor(name: String, nationality: String) :
             this(
-                pkType = "",
-                pkId = "",
-                sk = "",
-                gsi1pk = "",
-                gsi1sk = "",
                 name = name,
                 nationality = nationality,
                 songs = mutableListOf()
@@ -45,26 +34,10 @@ data class Artist(
     @Deprecated(message = "Intended to be used only by AWS SDK")
     constructor() :
             this(
-                pkType = "",
-                pkId = "",
-                sk = "",
-                gsi1pk = "",
-                gsi1sk = "",
                 name = "",
                 nationality = "",
                 songs = mutableListOf()
             )
-
-    @DynamoDbPartitionKey
-    @JsonIgnore
-    fun getPk(): String {
-        return "${pkType}#${pkId}"
-    }
-
-    @JsonProperty
-    fun setPk(pk: String) {
-        // Do nothing, this is a derived attribute
-    }
 
     @DynamoDbAttribute("Type")
     fun getType(): String {
