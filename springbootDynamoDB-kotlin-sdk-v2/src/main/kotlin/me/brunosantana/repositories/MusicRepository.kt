@@ -1,6 +1,7 @@
 package me.brunosantana.repositories
 
 import me.brunosantana.dto.Artist
+import me.brunosantana.dto.DynamoBaseModel
 import me.brunosantana.dto.Song
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
@@ -67,6 +68,26 @@ class MusicRepository(
         return artists[0]
     }
 
+    fun saveModel(model: DynamoBaseModel){
+        try {
+            when(model){
+                is Artist -> {
+                    val artistTable: DynamoDbTable<Artist> =
+                        enhancedClient.table("music", TableSchema.fromBean(Artist::class.java))
+                    artistTable.putItem(model)
+                }
+                is Song -> {
+                    val songTable: DynamoDbTable<Song> =
+                        enhancedClient.table("music", TableSchema.fromBean(Song::class.java))
+                    songTable.putItem(model)
+                }
+            }
+        }catch (e: DynamoDbException){
+            e.printStackTrace()
+        }
+    }
+
+    @Deprecated(message = "Use saveModel instead", replaceWith = ReplaceWith("saveModel"))
     fun saveArtist(artist: Artist){
         try {
             val artistTable: DynamoDbTable<Artist> =
@@ -77,6 +98,7 @@ class MusicRepository(
         }
     }
 
+    @Deprecated(message = "Use saveModel instead", replaceWith = ReplaceWith("saveModel"))
     fun saveSong(song: Song){
         try {
             val songTable: DynamoDbTable<Song> =

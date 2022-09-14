@@ -8,18 +8,18 @@ import org.springframework.stereotype.Service
 
 
 @Service
-class MusicService {
-	@Autowired
-	var musicRepository: MusicRepository? = null
+class MusicService(
+	val musicRepository: MusicRepository
+) {
 	fun findArtistByName(name: String): Artist {
-		return musicRepository!!.findArtistByName(name) ?: Artist(name = "", nationality = "")
+		return musicRepository.findArtistByName(name) ?: Artist(name = "", nationality = "")
 	}
 
 	fun saveArtist(artist: Artist){
-		musicRepository!!.saveArtist(artist)
+		musicRepository.saveModel(artist)
 	}
 
 	fun saveSong(song: Song){
-		musicRepository!!.saveSong(song)
+		musicRepository.saveModel(song)
 	}
 }
