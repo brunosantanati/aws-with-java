@@ -17,7 +17,9 @@ import software.amazon.awssdk.services.dynamodb.model.QueryRequest
 @Repository
 class MusicRepository(
     val client: DynamoDbClient,
-    val enhancedClient: DynamoDbEnhancedClient
+    val enhancedClient: DynamoDbEnhancedClient,
+    val artistRepository: ArtistRepository,
+    val songRepository: SongRepository
 ) {
     fun findArtistByName(name: String): Artist? {
         val partitionKeyName = "pk"
@@ -72,14 +74,10 @@ class MusicRepository(
         try {
             when(model){
                 is Artist -> {
-                    val artistTable: DynamoDbTable<Artist> =
-                        enhancedClient.table("music", TableSchema.fromBean(Artist::class.java))
-                    artistTable.putItem(model)
+                    artistRepository.save(model)
                 }
                 is Song -> {
-                    val songTable: DynamoDbTable<Song> =
-                        enhancedClient.table("music", TableSchema.fromBean(Song::class.java))
-                    songTable.putItem(model)
+                    songRepository.save(model)
                 }
             }
         }catch (e: DynamoDbException){
