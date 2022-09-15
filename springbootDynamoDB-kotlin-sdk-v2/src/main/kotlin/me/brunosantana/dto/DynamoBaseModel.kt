@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.*
 
+@DynamoDbBean
 abstract class DynamoBaseModel(
     @get:DynamoDbIgnore
     val pkType: String,
