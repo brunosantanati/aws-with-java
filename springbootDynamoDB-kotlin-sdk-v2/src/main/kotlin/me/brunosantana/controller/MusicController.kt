@@ -32,6 +32,9 @@ https://kotlinlang.org/docs/annotations.html
 
 DynamoDB Enhanced to support immutable Kotlin data classes #2096
 https://github.com/aws/aws-sdk-java-v2/issues/2096
+
+How to create a generic method to save any type in DynamoDB using AWS SDK 2.x?
+https://stackoverflow.com/questions/73736424/how-to-create-a-generic-method-to-save-any-type-in-dynamodb-using-aws-sdk-2-x
  */
 
 @RestController
