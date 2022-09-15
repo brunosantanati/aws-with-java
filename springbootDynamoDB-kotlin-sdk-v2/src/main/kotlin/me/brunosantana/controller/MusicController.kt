@@ -38,24 +38,24 @@ https://stackoverflow.com/questions/73736424/how-to-create-a-generic-method-to-s
  */
 
 @RestController
-class MusicController {
-    @Autowired
-    var musicService: MusicService? = null
+class MusicController(
+    val musicService: MusicService
+) {
     @RequestMapping(value = ["/artist/{artistName}"], method = [RequestMethod.GET])
     fun getArtistByName(@PathVariable artistName: String): ResponseEntity<Artist> {
-        val artist: Artist = musicService!!.findArtistByName(artistName)
+        val artist: Artist = musicService.findArtistByName(artistName)
         return ResponseEntity<Artist>(artist, HttpStatus.OK)
     }
 
     @RequestMapping(value = ["/artist"], method = [RequestMethod.POST])
     fun saveArtist(@RequestBody artist: Artist): ResponseEntity<ApiResponse> {
-        musicService!!.saveArtist(artist)
+        musicService.saveArtist(artist)
         return ResponseEntity<ApiResponse>(ApiResponse("Artist saved successfully"), HttpStatus.CREATED)
     }
 
     @RequestMapping(value = ["/song"], method = [RequestMethod.POST])
     fun saveSong(@RequestBody song: Song): ResponseEntity<ApiResponse> {
-        musicService!!.saveSong(song)
+        musicService.saveSong(song)
         return ResponseEntity<ApiResponse>(ApiResponse("Song saved successfully"), HttpStatus.CREATED)
     }
 }

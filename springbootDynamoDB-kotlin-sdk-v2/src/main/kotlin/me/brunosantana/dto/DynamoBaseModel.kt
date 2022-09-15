@@ -15,6 +15,8 @@ abstract class DynamoBaseModel(
     var gsi1pk: String,
     @get:DynamoDbSecondarySortKey(indexNames = ["gsi1"])
     var gsi1sk: String,
+    @get:DynamoDbAttribute(value = "VersionTimestamp")
+    var versionTimestamp: String? = null
 ) {
     @DynamoDbPartitionKey
     @JsonIgnore
