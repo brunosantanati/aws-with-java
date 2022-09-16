@@ -35,6 +35,16 @@ https://github.com/aws/aws-sdk-java-v2/issues/2096
 
 How to create a generic method to save any type in DynamoDB using AWS SDK 2.x?
 https://stackoverflow.com/questions/73736424/how-to-create-a-generic-method-to-save-any-type-in-dynamodb-using-aws-sdk-2-x
+
+What is this date format? 2011-08-12T20:17:46.384Z
+Answer: ISO 8601
+https://stackoverflow.com/questions/8405087/what-is-this-date-format-2011-08-12t201746-384z
+
+Comparing Two ZonedDateTime Instances
+https://howtodoinjava.com/java/date-time/zoneddatetime-comparison/
+
+Comparing Dates in Java
+https://www.baeldung.com/java-comparing-dates
  */
 
 @RestController
