@@ -11,7 +11,8 @@ class ArtistRepository(
     val enhancedClient: DynamoDbEnhancedClient
 ) {
 
-    fun save(artist: Artist){
+    fun save(artist: Artist, existingVersion: String?, versioningCheck: Boolean){
+        println(existingVersion)
         val artistTable: DynamoDbTable<Artist> =
             enhancedClient.table("music", TableSchema.fromBean(Artist::class.java))
         artistTable.putItem(artist)

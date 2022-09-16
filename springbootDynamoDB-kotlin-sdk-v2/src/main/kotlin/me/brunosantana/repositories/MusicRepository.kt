@@ -12,6 +12,7 @@ import software.amazon.awssdk.services.dynamodb.DynamoDbClient
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue
 import software.amazon.awssdk.services.dynamodb.model.DynamoDbException
 import software.amazon.awssdk.services.dynamodb.model.QueryRequest
+import software.amazon.awssdk.services.dynamodb.model.QueryResponse
 
 
 @Repository
@@ -71,18 +72,51 @@ class MusicRepository(
     }
 
     fun saveModel(model: DynamoBaseModel){
+
+        val pk = "${model.pkType}#${model.pkId}"
+        val existingModel = findByPkAndSk(pk, model.sk)
+        val existingVersion = existingModel?.versionTimestamp
+
         try {
             when(model){
                 is Artist -> {
-                    artistRepository.save(model)
+                    artistRepository.save(model, existingVersion, true)
                 }
                 is Song -> {
-                    songRepository.save(model)
+                    songRepository.save(model, existingVersion, true)
                 }
             }
         }catch (e: DynamoDbException){
             e.printStackTrace()
         }
+    }
+
+    fun findByPkAndSk(pk: String, sk: String): DynamoBaseModel? {
+        val tableName = "music"
+
+        val pkAttribute = AttributeValue.builder().s(pk).build()
+        val skAttribute = AttributeValue.builder().s(sk).build()
+
+        val queryReq = QueryRequest.builder()
+            .tableName(tableName)
+            .consistentRead(false)
+            .keyConditionExpression("pk = :pk and sk = :sk")
+            .expressionAttributeValues(mapOf(":pk" to pkAttribute, ":sk" to skAttribute))
+            .build()
+
+        try {
+            val queryResponse: QueryResponse = client.query(queryReq)
+            queryResponse.items().firstOrNull {
+                return when(it["Type"]!!.s()) {
+                    "ARTIST" -> Artist.attributeMapToArtist(it)
+                    "SONG" -> Song.attributeMapToSong(it)
+                    else -> throw Exception("Not found")
+                }
+            }
+        } catch (e: DynamoDbException) {
+            System.err.println(e.message)
+        }
+        return null
     }
 
     @Deprecated(message = "Use saveModel instead", replaceWith = ReplaceWith("saveModel"))
