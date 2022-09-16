@@ -56,7 +56,7 @@ data class Artist(
         fun attributeMapToArtist(attributeMap: Map<String, AttributeValue>): Artist {
             val name = attributeMap["ArtistName"]!!.s()
             val nationality = attributeMap["Nationality"]!!.s()
-            val versionTimestamp = attributeMap["VersionTimestamp"]!!.s()
+            val versionTimestamp = attributeMap["VersionTimestamp"]?.s()
             val artist = Artist(name = name, nationality = nationality)
             artist.versionTimestamp = versionTimestamp
             return artist

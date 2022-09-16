@@ -20,13 +20,15 @@ class ArtistRepository(
 
         if(versioningCheck){
             if(existingVersion == null){
+                println("no existing version")
                 artistTable.putItem(artist)
             }else{
 
                 val incomingDate = DateUtils.convertStringToZonedDateTime(artist.versionTimestamp!!)
                 val existingDate = DateUtils.convertStringToZonedDateTime(existingVersion)
 
-                if(DateUtils.isIncomingDateNewer(incomingDate, existingDate)){ //check versioning dates
+                if(DateUtils.isIncomingDateNewer(incomingDate, existingDate)){
+                    println("override")
                     artistTable.putItem(artist) //check how to override properly
                 }else{
                     println("Skip. ${artist.versionTimestamp} is older than $existingVersion")
@@ -34,6 +36,7 @@ class ArtistRepository(
 
             }
         }else{
+            println("check disabled")
             artistTable.putItem(artist)
         }
     }
