@@ -121,13 +121,13 @@ class MusicRepository(
     private final inline fun <reified T> save(model: T, incomingVersion: String, existingVersion: String?, versioningCheck: Boolean){
         println("incoming: $incomingVersion existing: $existingVersion")
 
-        val artistTable: DynamoDbTable<T> =
+        val musicTable: DynamoDbTable<T> =
             enhancedClient.table("music", TableSchema.fromBean(T::class.java))
 
         if(versioningCheck){
             if(existingVersion == null){
                 println("no existing version")
-                artistTable.putItem(model)
+                musicTable.putItem(model)
             }else{
 
                 val incomingDate = DateUtils.convertStringToZonedDateTime(incomingVersion)
@@ -135,7 +135,7 @@ class MusicRepository(
 
                 if(DateUtils.isIncomingDateNewer(incomingDate, existingDate)){
                     println("override")
-                    artistTable.putItem(model) //check how to override properly
+                    musicTable.putItem(model) //check how to override properly
                 }else{
                     println("Skip. $incomingVersion is older than $existingVersion")
                 }
@@ -143,7 +143,7 @@ class MusicRepository(
             }
         }else{
             println("check disabled")
-            artistTable.putItem(model)
+            musicTable.putItem(model)
         }
     }
 
