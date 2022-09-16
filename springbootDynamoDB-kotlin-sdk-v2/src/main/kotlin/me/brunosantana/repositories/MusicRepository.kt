@@ -1,9 +1,9 @@
 package me.brunosantana.repositories
 
+import me.brunosantana.DateUtils
 import me.brunosantana.dto.Artist
 import me.brunosantana.dto.DynamoBaseModel
 import me.brunosantana.dto.Song
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Repository
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable
@@ -18,9 +18,7 @@ import software.amazon.awssdk.services.dynamodb.model.QueryResponse
 @Repository
 class MusicRepository(
     val client: DynamoDbClient,
-    val enhancedClient: DynamoDbEnhancedClient,
-    val artistRepository: ArtistRepository,
-    val songRepository: SongRepository
+    val enhancedClient: DynamoDbEnhancedClient
 ) {
     fun findArtistByName(name: String): Artist? {
         val partitionKeyName = "pk"
@@ -76,14 +74,15 @@ class MusicRepository(
         val pk = "${model.pkType}#${model.pkId}"
         val existingModel = findByPkAndSk(pk, model.sk)
         val existingVersion = existingModel?.versionTimestamp
+        val incomingVersion = model.versionTimestamp!!
 
         try {
             when(model){
                 is Artist -> {
-                    artistRepository.save(model, existingVersion, true)
+                    save(model, incomingVersion, existingVersion, true)
                 }
                 is Song -> {
-                    songRepository.save(model, existingVersion, true)
+                    save(model, incomingVersion, existingVersion, true)
                 }
             }
         }catch (e: DynamoDbException){
@@ -117,6 +116,35 @@ class MusicRepository(
             System.err.println(e.message)
         }
         return null
+    }
+
+    private final inline fun <reified T> save(model: T, incomingVersion: String, existingVersion: String?, versioningCheck: Boolean){
+        println("incoming: $incomingVersion existing: $existingVersion")
+
+        val artistTable: DynamoDbTable<T> =
+            enhancedClient.table("music", TableSchema.fromBean(T::class.java))
+
+        if(versioningCheck){
+            if(existingVersion == null){
+                println("no existing version")
+                artistTable.putItem(model)
+            }else{
+
+                val incomingDate = DateUtils.convertStringToZonedDateTime(incomingVersion)
+                val existingDate = DateUtils.convertStringToZonedDateTime(existingVersion)
+
+                if(DateUtils.isIncomingDateNewer(incomingDate, existingDate)){
+                    println("override")
+                    artistTable.putItem(model) //check how to override properly
+                }else{
+                    println("Skip. $incomingVersion is older than $existingVersion")
+                }
+
+            }
+        }else{
+            println("check disabled")
+            artistTable.putItem(model)
+        }
     }
 
     @Deprecated(message = "Use saveModel instead", replaceWith = ReplaceWith("saveModel"))
