@@ -11,7 +11,7 @@ class MusicService(
 	val musicRepository: MusicRepository
 ) {
 	fun findArtistByName(name: String): Artist {
-		return musicRepository.findArtistByName(name) ?: Artist(name = "", nationality = "")
+		return musicRepository.findArtistByName(name) ?: Artist(name = "", nationality = "", isAwardWinner = false)
 	}
 
 	fun saveArtist(artist: Artist){

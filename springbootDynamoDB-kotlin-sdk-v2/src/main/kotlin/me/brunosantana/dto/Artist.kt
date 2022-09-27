@@ -15,6 +15,8 @@ data class Artist(
     var name: String,
     @get:DynamoDbAttribute("Nationality")
     var nationality: String,
+    @get:DynamoDbAttribute("IsAwardWinner")
+    var isAwardWinner: Boolean,
     @get:DynamoDbIgnore
     val songs: MutableList<Song> = mutableListOf()
 ): DynamoBaseModel(
@@ -24,10 +26,11 @@ data class Artist(
     gsi1pk = "type#artist",
     gsi1sk = "type#artist",
 ) {
-    constructor(name: String, nationality: String) :
+    constructor(name: String, nationality: String, isAwardWinner: Boolean) :
             this(
                 name = name,
                 nationality = nationality,
+                isAwardWinner = isAwardWinner,
                 songs = mutableListOf()
             )
 
@@ -36,6 +39,7 @@ data class Artist(
             this(
                 name = "",
                 nationality = "",
+                isAwardWinner = false,
                 songs = mutableListOf()
             )
 
@@ -56,8 +60,9 @@ data class Artist(
         fun attributeMapToArtist(attributeMap: Map<String, AttributeValue>): Artist {
             val name = attributeMap["ArtistName"]!!.s()
             val nationality = attributeMap["Nationality"]!!.s()
+            val isAwardWinner = attributeMap["IsAwardWinner"]!!.bool()
             val versionTimestamp = attributeMap["VersionTimestamp"]?.s()
-            val artist = Artist(name = name, nationality = nationality)
+            val artist = Artist(name = name, nationality = nationality, isAwardWinner = isAwardWinner)
             artist.versionTimestamp = versionTimestamp
             return artist
         }
