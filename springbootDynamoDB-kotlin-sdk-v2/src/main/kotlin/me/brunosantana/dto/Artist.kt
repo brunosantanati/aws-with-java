@@ -17,6 +17,8 @@ data class Artist(
     var nationality: String,
     @get:DynamoDbAttribute("IsAwardWinner")
     var isAwardWinner: Boolean,
+    @get:DynamoDbAttribute("IsAnInternationalSinger")
+    var isAnInternationalSinger: Boolean? = null, //It seems nullable Boolean does not work
     @get:DynamoDbIgnore
     val songs: MutableList<Song> = mutableListOf()
 ): DynamoBaseModel(
@@ -26,11 +28,12 @@ data class Artist(
     gsi1pk = "type#artist",
     gsi1sk = "type#artist",
 ) {
-    constructor(name: String, nationality: String, isAwardWinner: Boolean) :
+    constructor(name: String, nationality: String, isAwardWinner: Boolean, isAnInternationalSinger: Boolean?) :
             this(
                 name = name,
                 nationality = nationality,
                 isAwardWinner = isAwardWinner,
+                isAnInternationalSinger = isAnInternationalSinger,
                 songs = mutableListOf()
             )
 
@@ -40,6 +43,7 @@ data class Artist(
                 name = "",
                 nationality = "",
                 isAwardWinner = false,
+                isAnInternationalSinger = null,
                 songs = mutableListOf()
             )
 
@@ -60,9 +64,14 @@ data class Artist(
         fun attributeMapToArtist(attributeMap: Map<String, AttributeValue>): Artist {
             val name = attributeMap["ArtistName"]!!.s()
             val nationality = attributeMap["Nationality"]!!.s()
-            val isAwardWinner = attributeMap["IsAwardWinner"]!!.bool()
+            val isAwardWinner = attributeMap["IsAwardWinner"]?.bool() ?: false
+            val isAnInternationalSinger = attributeMap["IsAnInternationalSinger"]?.bool()
             val versionTimestamp = attributeMap["VersionTimestamp"]?.s()
-            val artist = Artist(name = name, nationality = nationality, isAwardWinner = isAwardWinner)
+            val artist = Artist(
+                name = name,
+                nationality = nationality,
+                isAwardWinner = isAwardWinner,
+                isAnInternationalSinger = isAnInternationalSinger)
             artist.versionTimestamp = versionTimestamp
             return artist
         }
