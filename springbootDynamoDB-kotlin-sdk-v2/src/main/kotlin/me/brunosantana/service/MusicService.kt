@@ -12,7 +12,13 @@ class MusicService(
 ) {
 	fun findArtistByName(name: String): Artist {
 		return musicRepository.findArtistByName(name) ?:
-			Artist(name = "", nationality = "", isAwardWinner = false, isAnInternationalSinger = null)
+			Artist(
+				name = "",
+				nationality = "",
+				isAwardWinner = false,
+				isAnInternationalSinger = null,
+				isAlsoActor = 0
+			)
 	}
 
 	fun saveArtist(artist: Artist){
