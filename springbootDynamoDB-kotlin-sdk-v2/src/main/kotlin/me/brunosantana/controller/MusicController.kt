@@ -45,6 +45,11 @@ https://howtodoinjava.com/java/date-time/zoneddatetime-comparison/
 
 Comparing Dates in Java
 https://www.baeldung.com/java-comparing-dates
+
+Custom converter
+https://github.com/aws/aws-sdk-java-v2/blob/master/services-custom/dynamodb-enhanced/README.md#override-the-mapping-of-a-single-attribute
+https://github.com/aws/aws-sdk-java-v2/issues/1912
+https://stackoverflow.com/questions/64378984/dynamodb-enum-conversion-version-2
  */
 
 @RestController

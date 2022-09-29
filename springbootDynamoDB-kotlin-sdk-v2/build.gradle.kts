@@ -24,6 +24,7 @@ dependencies {
 	implementation("software.amazon.awssdk:dynamodb")
 	implementation("software.amazon.awssdk:dynamodb-enhanced")
 	implementation("software.amazon.awssdk:apache-client")
+	implementation("org.apache.commons:commons-lang3:3.0.1")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
