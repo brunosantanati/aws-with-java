@@ -16,8 +16,8 @@ class MusicService(
 				name = "",
 				nationality = "",
 				isAwardWinner = false,
-				isAnInternationalSinger = null,
-				isAlsoActor = 0
+				internationalSinger = null,
+				actor = 0
 			)
 	}
 

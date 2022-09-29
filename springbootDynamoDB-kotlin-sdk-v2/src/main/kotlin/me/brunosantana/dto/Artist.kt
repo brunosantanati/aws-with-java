@@ -18,9 +18,9 @@ data class Artist(
     @get:DynamoDbAttribute("IsAwardWinner")
     var isAwardWinner: Boolean,
     @get:DynamoDbAttribute("IsAnInternationalSinger")
-    var isAnInternationalSinger: Boolean? = null, //It seems nullable Boolean does not work
+    var internationalSinger: Boolean? = null, //It seems nullable Boolean does not work
     @get:DynamoDbAttribute("IsAlsoActor")
-    var isAlsoActor: Int = 0,
+    var actor: Int = 0,
     @get:DynamoDbIgnore
     val songs: MutableList<Song> = mutableListOf()
 ): DynamoBaseModel(
@@ -34,15 +34,15 @@ data class Artist(
         name: String,
         nationality: String,
         isAwardWinner: Boolean,
-        isAnInternationalSinger: Boolean?,
-        isAlsoActor: Int
+        internationalSinger: Boolean?,
+        actor: Int
     ) :
             this(
                 name = name,
                 nationality = nationality,
                 isAwardWinner = isAwardWinner,
-                isAnInternationalSinger = isAnInternationalSinger,
-                isAlsoActor = isAlsoActor,
+                internationalSinger = internationalSinger,
+                actor = actor,
                 songs = mutableListOf()
             )
 
@@ -52,8 +52,8 @@ data class Artist(
                 name = "",
                 nationality = "",
                 isAwardWinner = false,
-                isAnInternationalSinger = null,
-                isAlsoActor = 0,
+                internationalSinger = null,
+                actor = 0,
                 songs = mutableListOf()
             )
 
@@ -75,15 +75,15 @@ data class Artist(
             val name = attributeMap["ArtistName"]!!.s()
             val nationality = attributeMap["Nationality"]!!.s()
             val isAwardWinner = attributeMap["IsAwardWinner"]?.bool() ?: false
-            val isAnInternationalSinger = attributeMap["IsAnInternationalSinger"]?.bool()
-            val isAlsoActor = attributeMap["IsAlsoActor"]?.n()?.toInt() ?: 0
+            val internationalSinger = attributeMap["IsAnInternationalSinger"]?.bool()
+            val actor = attributeMap["IsAlsoActor"]?.n()?.toInt() ?: 0
             val versionTimestamp = attributeMap["VersionTimestamp"]?.s()
             val artist = Artist(
                 name = name,
                 nationality = nationality,
                 isAwardWinner = isAwardWinner,
-                isAnInternationalSinger = isAnInternationalSinger,
-                isAlsoActor = isAlsoActor)
+                internationalSinger = internationalSinger,
+                actor = actor)
             artist.versionTimestamp = versionTimestamp
             return artist
         }
