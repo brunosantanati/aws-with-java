@@ -230,4 +230,37 @@ public class MusicRepository {
 		return artists.get(0);
 	}
 
+	public Song queryIndexToGetSong() {
+
+		List<Song> songs = new ArrayList<>();
+
+		DynamoDB dynamoDB = new DynamoDB(client);
+
+		Table table = dynamoDB.getTable("music");
+		Index index = table.getIndex("gsi3");
+
+		QuerySpec spec = new QuerySpec()
+				.withKeyConditionExpression("sk = :sk")
+				.withValueMap(new ValueMap().withString(":sk", "song#sam_smith#too_good_at_goodbyes"));
+
+		ItemCollection<QueryOutcome> items = index.query(spec);
+		Iterator<Item> iter = items.iterator();
+
+		System.out.println("Converting using a map of attributes");
+		while (iter.hasNext()) {
+			Item item = iter.next();
+
+			Map<String, Object> attributesMap = item.asMap();
+
+			String artistName = (String) attributesMap.get("ArtistName");
+			String songName = (String) attributesMap.get("SongName");
+			String albumTitle = (String) attributesMap.get("AlbumTitle");
+
+			Song song = new Song(artistName, songName, albumTitle);
+			songs.add(song);
+		}
+
+		return songs.get(0);
+	}
+
 }

@@ -2,6 +2,7 @@ package com.dynamodb.service;
 
 import java.util.List;
 
+import com.dynamodb.dto.Song;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,10 @@ public class MusicService {
 	
 	public List<Artist> queryIndex3() {
 		return musicRepository.queryIndex3();
+	}
+
+	public Song queryIndexToGetSong() {
+		return musicRepository.queryIndexToGetSong();
 	}
 
 }
