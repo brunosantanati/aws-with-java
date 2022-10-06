@@ -46,6 +46,16 @@ import com.fasterxml.jackson.databind.JsonMappingException;
  * 
  * DynamoDB Mapper GSI Query Example in Java
  * https://beabetterdev.com/2021/10/24/dynamodb-mapper-gsi-query-example-in-java/
+ *
+ * GSI
+ * https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.html
+ *
+ * Dynamo how to query by sort key only
+ * Answer: it's not possible, and it requires a GSI
+ * https://stackoverflow.com/questions/42371411/dynamodb-how-to-query-by-sort-key-only
+ *
+ * Inverted Indexes
+ * https://aws.amazon.com/getting-started/hands-on/design-a-database-for-a-mobile-app-with-dynamodb/module-4/
  * 
  * Java Annotations for DynamoDB
  * https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBMapper.Annotations.html
