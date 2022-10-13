@@ -263,4 +263,29 @@ public class MusicRepository {
 		return songs.get(0);
 	}
 
+	public Song queryIndexToGetASong() {
+		AttributeValue songSk = new AttributeValue("song#sam_smith#too_good_at_goodbyes");
+		Map<String, AttributeValue> map = new HashMap<>();
+		map.put(":sk", songSk);
+
+		QueryRequest queryRequest = new QueryRequest()
+				.withTableName("music")
+				.withConsistentRead(false)
+				.withIndexName("gsi3")
+				.withKeyConditionExpression("sk = :sk")
+				.withExpressionAttributeValues(map);
+
+		QueryResult query = client.query(queryRequest);
+
+		List<Map<String,AttributeValue>> items = query.getItems();
+
+		List<Song> songs = new ArrayList<>();
+		items.forEach(item -> {
+			Song song = Song.attributeMapToSong(item);
+			songs.add(song);
+		});
+
+		return songs.get(0);
+	}
+
 }

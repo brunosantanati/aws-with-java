@@ -64,4 +64,10 @@ public class MusicController {
 		return new ResponseEntity<>(song, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/gsi3-2", method = RequestMethod.GET)
+	public ResponseEntity<Song> queryIndexToGetASong() {
+		Song song = musicService.queryIndexToGetASong();
+		return new ResponseEntity<>(song, HttpStatus.OK);
+	}
+
 }

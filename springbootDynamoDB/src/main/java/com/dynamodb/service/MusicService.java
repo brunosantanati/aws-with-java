@@ -41,4 +41,8 @@ public class MusicService {
 		return musicRepository.queryIndexToGetSong();
 	}
 
+	public Song queryIndexToGetASong() {
+		return musicRepository.queryIndexToGetASong();
+	}
+
 }
